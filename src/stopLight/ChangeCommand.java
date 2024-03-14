@@ -7,14 +7,18 @@ package stopLight;
 import mvc.*;
 
 public class ChangeCommand extends Command {
-
+    Model model;
     public ChangeCommand(Model model) {
         super(model);
+        this.model = model;
+        System.out.println("created");
     }
+    public void execute() throws Exception {
+        if (!(this.model instanceof Stoplight)) {
+            throw new Exception("Model must instantiate Stoplight");
+        }
 
-    public void execute() {
-        Stoplight light = (Stoplight)model;
+        Stoplight light = (Stoplight)this.model;
         light.change();
     }
-
 }
