@@ -19,6 +19,7 @@ abstract public class Cell extends Publisher implements Serializable {
         if (partner == null && neighbors != null) {
             partner = null;
             ArrayList<Cell> potential_partners = new ArrayList<>(neighbors);
+            if (potential_partners.size() == 0) return;
             int randomInRange = rng.nextInt(potential_partners.size());
             for (int i = randomInRange; i < potential_partners.size(); i++) {
                 Cell current = potential_partners.get(i);

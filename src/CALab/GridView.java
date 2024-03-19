@@ -6,10 +6,13 @@ import mvc.*;
 import java.awt.*;
 
 public class GridView extends View {
-
+    public Grid grid;
     private CellView[][] cellViews;
     public GridView(Grid grid) {
         super(grid);
+        this.grid = grid;
+        this.cellViews = new CellView[grid.dim][grid.dim];
+        setLayout(new GridLayout(grid.dim, grid.dim));
         for ( int y = 0; y < grid.dim; y++ ) {
             for ( int x = 0; x < grid.dim; x++ ) {
                 CellView current = new CellView( grid.getCell(y, x) );
@@ -19,28 +22,9 @@ public class GridView extends View {
                 add(current);
             }
         }
-//        super(grid);
-//        Grid gridModel = (Grid) model;
-//
-//        int dim = gridModel.getDim();
-//        cellViews = new CellView[dim][dim];
-//
-//        setLayout(new GridLayout(dim, dim));
-//
-//        // Create and add CellViews to the grid
-//        for (int row = 0; row < dim; row++) {
-//            for (int col = 0; col < dim; col++) {
-//                Cell cellModel = gridModel.getCell(row, col);
-//                CellView cellView = new CellView(cellModel);
-//                cellViews[row][col] = cellView;
-//                add(cellView);
-//            }
-//        }
     }
 
-    public void update(String msg, Object oldState, Object newState) {
-        Grid updatedGrid = (Grid) newState;
-
+    public void update() {;
         // Iterate through cellViews and update each one
         for (CellView[] cellView : this.cellViews) {
             for (CellView view : cellView) {

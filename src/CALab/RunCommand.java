@@ -12,7 +12,6 @@ public class RunCommand extends Command {
         this.cycles =  cycles;
     }
 
-    //TODO: make this handle diff # of cycles
     public void execute() throws Exception {
         System.out.println("Running run...");
         Grid grid = (Grid)this.model;

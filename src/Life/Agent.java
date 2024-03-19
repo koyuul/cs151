@@ -34,7 +34,7 @@ public class Agent extends Cell {
             this.state = rng.nextInt(2); // random 0 or 1;
             this.ambience = this.society.getNeighbors(this, 1).size();
         } else {
-            this.state = 1;
+            this.state = 0;
             this.ambience = this.society.getNeighbors(this, 1).size();
         }
         this.notifySubscribers();
@@ -42,7 +42,7 @@ public class Agent extends Cell {
 
     @Override
     public int getStatus() {
-        return this.ambience;
+        return this.state;
     }
 
     @Override
@@ -53,7 +53,7 @@ public class Agent extends Cell {
 
     @Override
     public Color getColor() {
-        if (state == 0){
+        if (this.state == 0){
             return Color.RED;
         } else {
             return Color.GREEN;

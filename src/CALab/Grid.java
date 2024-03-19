@@ -3,6 +3,8 @@ package CALab;
 import java.awt.*;
 import java.util.*;
 import java.io.*;
+import java.util.concurrent.TimeUnit;
+
 import mvc.*;
 
 import static mvc.Utilities.rng;
@@ -65,13 +67,19 @@ public abstract class Grid extends Model {
         The asker is not a neighbor of itself.
         */
         Set<Cell> ret = new HashSet<Cell>();
-        for (int y = -1 ; y < 2; y++) { // read top mid bottom
-            for (int x = -1; x < 2; x++) { // read left mid right
-                if (x != 0 && y!= 0) { // if not self
+        for (int x = -1 ; x < 2; x++) { // read top mid bottom
+            for (int y = -1; y < 2; y++) { // read left mid right
+                if (x != 0 || y!= 0) { // if not self
                     int rx = asker.col + x;
                     int ry = asker.row + y;
                     if (rx >= 0 && ry >= 0 && rx < dim && ry < dim) {
-                        ret.add(getCell(ry, rx));
+
+                        Cell current = getCell(ry, rx);
+                        if (current != null && current.getColor() == Color.GREEN) {
+                            ret.add(current);
+                            System.out.print("neighbor detected at: " + rx + " " + ry + ". ");
+                            System.out.println("neighbor at +" + x + " +" + y);
+                        }
                     }
                 }
             }

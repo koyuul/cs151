@@ -17,22 +17,31 @@ public class GridPanel extends AppPanel {
 
     public GridPanel(AppFactory factory) {
         super(factory);
+        JPanel buttonsContainer = new JPanel(new GridLayout(2, 2));
+        Dimension buttonsContainerSize = new Dimension(150, 100);
 
         runone = new JButton("RUN1");
         runone.addActionListener(this);
-        controlPanel.add(runone);
+        runone.setPreferredSize(buttonsContainerSize);
+        buttonsContainer.add(runone, BorderLayout.NORTH);
 
         runfifty = new JButton("RUN50");
         runfifty.addActionListener(this);
-        controlPanel.add(runfifty);
+        runfifty.setPreferredSize(buttonsContainerSize);
+        buttonsContainer.add(runfifty, BorderLayout.NORTH);
 
         populate = new JButton("POPULATE");
         populate.addActionListener(this);
-        controlPanel.add(populate);
+        populate.setPreferredSize(buttonsContainerSize);
+        buttonsContainer.add(populate, BorderLayout.NORTH);
 
         clear = new JButton("CLEAR");
         clear.addActionListener(this);
-        controlPanel.add(clear);
+        clear.setPreferredSize(buttonsContainerSize);
+        buttonsContainer.add(clear, BorderLayout.NORTH);
+
+
+        controlPanel.add(buttonsContainer);
     }
 
     // Main does not exist here, but instead in an inheriting panel (In this case, LifePanel)
