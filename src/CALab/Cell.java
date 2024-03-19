@@ -22,7 +22,7 @@ abstract public class Cell extends Publisher implements Serializable {
             int randomInRange = rng.nextInt(potential_partners.size());
             for (int i = randomInRange; i < potential_partners.size(); i++) {
                 Cell current = potential_partners.get(i);
-                if (current.partner == null) {
+                if (current != null && current.partner == null) {
                     this.partner = current;
                     current.partner = this;
                     break;
@@ -44,15 +44,20 @@ abstract public class Cell extends Publisher implements Serializable {
 
     // observer neighbors' states
     public abstract void observe();
+
     // interact with a random neighbor
     public abstract void interact();
+
     // update my state
     public abstract void update();
-    // set status to status + 1 mod whatever
-    public abstract void reset(boolean randomly);
-    public abstract int getStatus();
-    public abstract void nextState();
-    // set status to a random or initial value
-    public abstract Color getColor();
 
+    // set status to a random or initial value
+    public abstract void reset(boolean randomly);
+
+    public abstract int getStatus();
+
+    // set status to status + 1 mod whatever
+    public abstract void nextState();
+
+    public abstract Color getColor();
 }

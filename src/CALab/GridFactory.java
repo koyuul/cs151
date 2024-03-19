@@ -7,12 +7,10 @@ import mvc.View;
 
 import java.awt.*;
 
-public class GridFactory implements AppFactory {
-    // TODO: ASK PROF how to implement makemodel when Grid is abstract? Can't cast model to Grid
-    @Override
-    public Model makeModel() {
-        return new Model();
-    }
+// must be abstract i guess. so it doesnt do makemodel, but life factory must do it
+// life packages needs: society, agent, lifepanel (in main), lifefactory (needs model, makemodel returns new society)
+//      makeModel() { return new society() };
+public abstract class GridFactory implements AppFactory {
     @Override
     public View makeView(Model model) {
         return new GridView((Grid)model);

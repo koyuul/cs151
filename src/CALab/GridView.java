@@ -7,16 +7,18 @@ import java.awt.*;
 
 public class GridView extends View {
 
-    private CellView cellViews[][];
-//    Grid model = new Grid();
+    private CellView[][] cellViews;
     public GridView(Grid grid) {
         super(grid);
-        /*
-        Cell cell = new CellView(((Grid)model).getCell(row, col)
-        cellViews[row][col] = cell
-        set cell.row and cell.col here
-        */
-
+        for ( int y = 0; y < grid.dim; y++ ) {
+            for ( int x = 0; x < grid.dim; x++ ) {
+                CellView current = new CellView( grid.getCell(y, x) );
+                if (this.cellViews != null && this.cellViews[y] != null) {
+                    this.cellViews[y][x] = current;
+                }
+                add(current);
+            }
+        }
 //        super(grid);
 //        Grid gridModel = (Grid) model;
 //
@@ -40,7 +42,7 @@ public class GridView extends View {
         Grid updatedGrid = (Grid) newState;
 
         // Iterate through cellViews and update each one
-        for (CellView[] cellView : cellViews) {
+        for (CellView[] cellView : this.cellViews) {
             for (CellView view : cellView) {
                 view.update();
             }

@@ -32,7 +32,9 @@ public abstract class Grid extends Model {
                 c.row = y;
                 c.myGrid = this;
                 c.neighbors = getNeighbors(c, 1);
+                this.cells[y][x] = c;
                 c.choosePartner();
+                c.notifySubscribers();
             }
         }
     }
@@ -47,9 +49,10 @@ public abstract class Grid extends Model {
                 } else {
                     current.reset(false);
                 }
+                current.choosePartner();
+                current.notifySubscribers();
             }
         }
-        this.notifySubscribers();
     }
 
 
@@ -82,6 +85,7 @@ public abstract class Grid extends Model {
             for (int x = 0; x < dim; x++) {
                 Cell c = getCell(y, x);
                 c.observe();
+                c.notifySubscribers();
             }
         }
         notifySubscribers();
@@ -93,6 +97,7 @@ public abstract class Grid extends Model {
             for (int x = 0; x < dim; x++) {
                 Cell c = getCell(y, x);
                 c.interact();
+                c.notifySubscribers();
             }
         }
         notifySubscribers();
@@ -104,6 +109,7 @@ public abstract class Grid extends Model {
             for (int x = 0; x < dim; x++) {
                 Cell c = getCell(y, x);
                 c.update();
+                c.notifySubscribers();
             }
         }
         notifySubscribers();
