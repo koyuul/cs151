@@ -70,16 +70,13 @@ public abstract class Grid extends Model {
         for (int x = -1 ; x < 2; x++) { // read top mid bottom
             for (int y = -1; y < 2; y++) { // read left mid right
                 if (x != 0 || y!= 0) { // if not self
-                    int rx = asker.col + x;
-                    int ry = asker.row + y;
-                    if (rx >= 0 && ry >= 0 && rx < dim && ry < dim) {
-
-                        Cell current = getCell(ry, rx);
-                        if (current != null && current.getColor() == Color.GREEN) {
-                            ret.add(current);
-                            System.out.print("neighbor detected at: " + rx + " " + ry + ". ");
-                            System.out.println("neighbor at +" + x + " +" + y);
-                        }
+                    int rx = Math.floorMod(asker.col + x, dim);
+                    int ry = Math.floorMod(asker.row + y, dim);
+                    Cell current = getCell(ry, rx);
+                    if (current != null && current.getColor().equals(Color.GREEN)) {
+                        ret.add(current);
+                        System.out.print("neighbor detected at: " + rx + " " + ry + ". ");
+                        System.out.println("neighbor at +" + x + " +" + y);
                     }
                 }
             }
@@ -129,6 +126,7 @@ public abstract class Grid extends Model {
             interact();
             update();
             observe();
+            notifySubscribers();
             time++;
             System.out.println("time = " + time);
         }

@@ -10,8 +10,7 @@ public class LifePanel extends GridPanel {
     }
 
     public static void main(String[] args) { // This code was created in class. Should be untouched...
-        GridFactory factory = new LifeFactory();
-        GridPanel panel = new GridPanel(factory);
+        GridPanel panel = new GridPanel(new LifeFactory());
         panel.display();
     }
 }

@@ -8,7 +8,7 @@ import static mvc.Utilities.rng;
 
 public class Agent extends Cell {
     public int state = 0; // 0 = dead, 1 = alive
-    public int ambience = 8;
+    public int ambience = 0;
     public Society society;
     @Override
     public void observe() {
@@ -35,20 +35,21 @@ public class Agent extends Cell {
             this.ambience = this.society.getNeighbors(this, 1).size();
         } else {
             this.state = 0;
-            this.ambience = this.society.getNeighbors(this, 1).size();
+            this.ambience = 0;
         }
         this.notifySubscribers();
     }
 
     @Override
     public int getStatus() {
-        return this.state;
+        return this.ambience;
     }
 
     @Override
     public void nextState() {
         if (this.state == 1) this.state = 0;
         else if (this.state == 0) this.state = 1;
+        notifySubscribers();
     }
 
     @Override
